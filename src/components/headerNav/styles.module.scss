@@ -1,0 +1,158 @@
+.header {
+  background: var(--primary-background-color);
+  border-bottom: 1px solid #f1f1f1;
+  color: #909090;
+  height: 5rem;
+  z-index: 250;
+  //margin-bottom: 1px;
+
+  .headerMain {
+    margin: auto;
+    max-width: 1440px;
+  }
+
+  .notMobile {
+    margin: 0 2rem !important;
+  }
+
+  .headerInline {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0 0.917rem 0 1.333rem;
+    max-width: 1440px;
+
+    .imageWithName {
+      margin-right: 1rem;
+    }
+
+    .logo {
+      display: inline-block;
+      height: 22px;
+      line-height: 22px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .mainNav {
+      flex: 1 0 auto;
+      display: flex;
+      text-align: center;
+      align-content: center;
+      justify-content: space-between;
+      position: relative;
+
+      .disable {
+        display: none;
+      }
+
+      .phoneShowMenu {
+        height: 5rem;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        color: #1e80ff;
+        font-size: 1.33rem;
+        justify-content: center;
+        padding: 0;
+        width: 5.66rem;
+
+        span {
+          margin-right: 0.333rem;
+        }
+
+        .fold_down {
+          fill: #515767;
+          transform: rotate(0deg);
+          transition: transform .2s ease-in-out;
+        }
+
+        .fold_up {
+          fill: #1e80ff;
+          transform: rotate(-180deg);
+          transition: transform .2s ease-in-out;
+        }
+      }
+
+      .navItems_fold {
+        display: block;
+        position: absolute;
+        right: -4rem;
+        left: -4.3rem;
+        padding: 0.667rem;
+        width: 11.9rem;
+        top: 52px;
+        background-color: #fff;
+        box-shadow: 0 8px 24px rgb(81 87 103 / 16%);
+        border: 1px solid #ebebeb;
+        border-radius: 4px;
+        font-size: 1.2rem;
+        z-index: 999;
+
+        .navItem {
+          height: 4rem;
+        }
+
+        .navItemLink {
+          height: 4rem;
+          line-height: 4rem;
+        }
+
+        .navItemText {
+          height: 4rem;
+          line-height: 4rem;
+        }
+      }
+
+
+      .navItems {
+        display: flex;
+      }
+
+      .navItem {
+        list-style: none;
+        color: var(--juejin-font-2);
+        font-size: 1.167rem;
+        height: 5rem;
+        cursor: pointer;
+
+        .active {
+          color: #1e80ff;
+        }
+
+        .navItemLink {
+          text-decoration: none;
+          display: inline-block;
+          margin: 0 1rem;
+          height: 5rem;
+          line-height: 5rem;
+          position: relative;
+          text-align: center;
+        }
+
+        .navItemLink:hover:before {
+          content: "";
+          position: absolute;
+          top: auto;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          height: 2px;
+          background-color: #1e80ff
+        }
+
+        .navItemLink:hover {
+          color: var(--juejin-font-1);
+          border-bottom: 1px solid #007fff;
+          outline-width: 0;
+        }
+
+        .styles.navItemText {
+          line-height: 5rem;
+        }
+      }
+    }
+
+
+  }
+}

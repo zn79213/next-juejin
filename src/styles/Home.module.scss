@@ -1,0 +1,263 @@
+.main {
+  //position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 5.17rem auto 0 auto;
+
+  .articleMainPC {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    //align-items: center;
+  }
+
+  .listHeader {
+    padding: 1.3rem 1rem;
+    border-bottom: 1px solid hsla(0,0%,59.2%,.1);
+    font-size: 1.17rem;
+    color: #909090;
+  }
+
+  .articles {
+
+    .article:hover {
+      background: #fafafa;
+    }
+
+    .article {
+      position: relative;
+      cursor: pointer;
+      padding: 12px 20px 0;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .articleMain {
+        margin-top: 6px;
+        padding-bottom: 12px;
+        display: flex;
+        border-bottom: 1px solid rgba(228, 230, 235, 0.5);
+        width: 100%;
+
+        .contentMain {
+          flex: 1 1 auto;
+
+          .title {
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            color: #1d2129;
+            width: 100%;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            margin-bottom: 8px;
+          }
+
+          .abstract {
+            color: #86909c;
+            font-size: 13px;
+            line-height: 22px;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            margin-bottom: 10px;
+          }
+        }
+
+        .articleCover {
+          flex: 0 0 auto;
+          width: 120px;
+          height: 80px;
+          margin-left: 24px;
+          border-radius: 2px
+        }
+      }
+
+      .dislikeButton {
+        position: absolute;
+        right: 1.667rem;
+        transition: all .15s linear;
+        top: 1.333rem;
+        width: 1rem;
+        height: 1rem;
+        background: url(//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/29d9ea6….svg) 0 0 no-repeat;
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+    }
+  }
+
+  @media screen and (min-width: 960px) {
+
+    .articleMainPC {
+      margin-right: 21.667rem;
+      border-radius: 2px;
+      width: 700px;
+    }
+  }
+}
+
+.vewNav {
+  position: fixed;
+  top: 5.083rem;
+  left: 0;
+  width: 100%;
+  height: 3.833rem;
+  z-index: 100;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+  transition: all .2s;
+  transform: translateZ(0);
+  background-color: #fff;
+
+  .navList {
+    max-width: 960px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+
+    .listItem {
+      height: 100%;
+      align-items: center;
+      display: flex;
+      flex-shrink: 0;
+      font-size: 1.16rem;
+      color: #71777c;
+      padding: 0 1rem;
+    }
+  }
+}
+
+
+///* Enable hover only on non-touch devices */
+//@media (hover: hover) and (pointer: fine) {
+//  .card:hover {
+//    background: rgba(var(--card-rgb), 0.1);
+//    border: 1px solid rgba(var(--card-border-rgb), 0.15);
+//  }
+//
+//  .card:hover span {
+//    transform: translateX(4px);
+//  }
+//}
+//
+//@media (prefers-reduced-motion) {
+//  .thirteen::before {
+//    animation: none;
+//  }
+//
+//  .card:hover span {
+//    transform: none;
+//  }
+//}
+//
+///* Mobile */
+//@media (max-width: 700px) {
+//  .content {
+//    padding: 4rem;
+//  }
+//
+//  .grid {
+//    grid-template-columns: 1fr;
+//    margin-bottom: 120px;
+//    max-width: 320px;
+//    text-align: center;
+//  }
+//
+//  .card {
+//    padding: 1rem 2.5rem;
+//  }
+//
+//  .card h2 {
+//    margin-bottom: 0.5rem;
+//  }
+//
+//  .center {
+//    padding: 8rem 0 6rem;
+//  }
+//
+//  .center::before {
+//    transform: none;
+//    height: 300px;
+//  }
+//
+//  .description {
+//    font-size: 0.8rem;
+//  }
+//
+//  .description a {
+//    padding: 1rem;
+//  }
+//
+//  .description p,
+//  .description div {
+//    display: flex;
+//    justify-content: center;
+//    position: fixed;
+//    width: 100%;
+//  }
+//
+//  .description p {
+//    align-items: center;
+//    inset: 0 0 auto;
+//    padding: 2rem 1rem 1.4rem;
+//    border-radius: 0;
+//    border: none;
+//    border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
+//    background: linear-gradient(
+//      to bottom,
+//      rgba(var(--background-start-rgb), 1),
+//      rgba(var(--callout-rgb), 0.5)
+//    );
+//    background-clip: padding-box;
+//    backdrop-filter: blur(24px);
+//  }
+//
+//  .description div {
+//    align-items: flex-end;
+//    pointer-events: none;
+//    inset: auto 0 0;
+//    padding: 2rem;
+//    height: 200px;
+//    background: linear-gradient(
+//      to bottom,
+//      transparent 0%,
+//      rgb(var(--background-end-rgb)) 40%
+//    );
+//    z-index: 1;
+//  }
+//}
+//
+///* Tablet and Smaller Desktop */
+//@media (min-width: 701px) and (max-width: 1120px) {
+//  .grid {
+//    grid-template-columns: repeat(2, 50%);
+//  }
+//}
+//
+//@media (prefers-color-scheme: dark) {
+//  .vercelLogo {
+//    filter: invert(1);
+//  }
+//
+//  .logo,
+//  .thirteen img {
+//    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+//  }
+//}
+//
+//@keyframes rotate {
+//  from {
+//    transform: rotate(360deg);
+//  }
+//  to {
+//    transform: rotate(0deg);
+//  }
+//}
