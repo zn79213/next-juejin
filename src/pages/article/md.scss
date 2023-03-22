@@ -1,0 +1,196 @@
+//.markdownBody {
+//  word-break: break-word;
+//  line-height: 1.75;
+//  font-weight: 400;
+//  font-size: 16px;
+//  overflow-x: hidden;
+//  color: #252933
+//}
+
+.markdownBody h1, .markdownBody h2, .markdownBody h3, .markdownBody h4, .markdownBody h5, .markdownBody h6 {
+  line-height: 1.5;
+  margin-top: 35px;
+  margin-bottom: 10px;
+  padding-bottom: 5px
+}
+
+.markdownBody h1 {
+  font-size: 24px;
+  line-height: 38px;
+  margin-bottom: 5px
+}
+
+.markdownBody h2 {
+  font-size: 22px;
+  line-height: 34px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ececec
+}
+
+.markdownBody h3 {
+  font-size: 20px;
+  line-height: 28px
+}
+
+.markdownBody h4 {
+  font-size: 18px;
+  line-height: 26px
+}
+
+.markdownBody h5 {
+  font-size: 17px;
+  line-height: 24px
+}
+
+.markdownBody h6 {
+  font-size: 16px;
+  line-height: 24px
+}
+
+.markdownBody p {
+  line-height: inherit;
+  margin-top: 22px;
+  margin-bottom: 22px
+}
+
+.markdownBody img {
+  max-width: 100%
+}
+
+.markdownBody hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin-top: 32px;
+  margin-bottom: 32px
+}
+
+.markdownBody code {
+  word-break: break-word;
+  border-radius: 2px;
+  overflow-x: auto;
+  background-color: var(--md-code-bgc);
+  color: #ff502c;
+  font-size: .87em;
+  padding: .065em .4em
+}
+
+.markdownBody code, .markdownBody pre {
+  font-family: Menlo, Monaco, Consolas, Courier New, monospace
+}
+
+.markdownBody pre {
+  overflow: auto;
+  position: relative;
+  line-height: 1.75
+}
+
+.markdownBody pre > code {
+  font-size: 12px;
+  padding: 15px 12px;
+  margin: 0;
+  word-break: normal;
+  display: block;
+  overflow-x: auto;
+  color: var(--md-code-color);
+  background:  var(--md-code-bgc)
+}
+
+.markdownBody a {
+  text-decoration: none;
+  color: #0269c8;
+  border-bottom: 1px solid #d1e9ff
+}
+
+.markdownBody a:active, .markdownBody a:hover {
+  color: #275b8c
+}
+
+.markdownBody table {
+  display: inline-block !important;
+  font-size: 12px;
+  width: auto;
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid #f6f6f6
+}
+
+.markdownBody thead {
+  background: #f6f6f6;
+  color: #000;
+  text-align: left
+}
+
+.markdownBody tr:nth-child(2n) {
+  background-color: #fcfcfc
+}
+
+.markdownBody td, .markdownBody th {
+  padding: 12px 7px;
+  line-height: 24px
+}
+
+.markdownBody td {
+  min-width: 120px
+}
+
+.markdownBody blockquote {
+  color: #666;
+  padding: 1px 23px;
+  margin: 22px 0;
+  border-left: 4px solid #cbcbcb;
+  background-color: #f8f8f8
+}
+
+.markdownBody blockquote:after {
+  display: block;
+  content: ""
+}
+
+.markdownBody blockquote > p {
+  margin: 10px 0
+}
+
+.markdownBody ol, .markdownBody ul {
+  padding-left: 28px
+}
+
+.markdownBody ol li, .markdownBody ul li {
+  margin-bottom: 0;
+  list-style: inherit
+}
+
+.markdownBody ol li .task-list-item, .markdownBody ul li .task-list-item {
+  list-style: none
+}
+
+.markdownBody ol li .task-list-item ol, .markdownBody ol li .task-list-item ul, .markdownBody ul li .task-list-item ol, .markdownBody ul li .task-list-item ul {
+  margin-top: 0
+}
+
+.markdownBody ol ol, .markdownBody ol ul, .markdownBody ul ol, .markdownBody ul ul {
+  margin-top: 3px
+}
+
+.markdownBody ol li {
+  padding-left: 6px
+}
+
+.markdownBody .contains-task-list {
+  padding-left: 0
+}
+
+.markdownBody .task-list-item {
+  list-style: none
+}
+
+@media (max-width: 720px) {
+  .markdownBody h1 {
+    font-size: 24px
+  }
+  .markdownBody h2 {
+    font-size: 20px
+  }
+  .markdownBody h3 {
+    font-size: 18px
+  }
+}

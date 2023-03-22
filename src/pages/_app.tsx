@@ -7,6 +7,7 @@ import {UserAgentProvider} from "@/stores/userAgent";
 import {ILayoutProps, Layout} from "@/components/layout";
 import axios from "axios";
 import {getIsMobile, getIsSupportWebp, LOCALDOMAIN} from "@/utils";
+import {TransContextProvider} from "@/stores/transfrom";
 
 export interface IComponentProps {
     isMobile?: boolean;
@@ -28,9 +29,11 @@ const MyApp = (data: AppProps & ILayoutProps & IComponentProps): JSX.Element => 
             </Head>
             <ThemeContextProvider>
                 <UserAgentProvider>
-                    <Layout headerNavData={headerNavData} asideData={asideData}>
-                        <Component {...pageProps} isMobile={isMobile} isSupportWebp={isSupportWebp}/>
-                    </Layout>
+                    <TransContextProvider>
+                        <Layout headerNavData={headerNavData} asideData={asideData}>
+                            <Component {...pageProps} isMobile={isMobile} isSupportWebp={isSupportWebp}/>
+                        </Layout>
+                    </TransContextProvider>
                 </UserAgentProvider>
             </ThemeContextProvider>
         </div>

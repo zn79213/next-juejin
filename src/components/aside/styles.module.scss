@@ -1,11 +1,11 @@
 .bannerBlock {
-  background-color: #fff;
+  background: var(--article--item);
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
   border-radius: 2px;
   margin-bottom: 1.3rem;
   font-size: 1.16rem;
   line-height: 1.29;
-  color: #333;
+  color: var(--content--color);
   overflow: hidden;
 }
 
@@ -101,7 +101,7 @@
       font-weight: 500;
       font-size: 14px;
       line-height: 22px;
-      color: #1d2129;
+      color: var(--download-title);
     }
 
     .desc {
@@ -114,7 +114,6 @@
 }
 
 .authorRank {
-  background-color: #fff;
 
   header {
     padding: 1rem 1.3rem;
@@ -123,7 +122,8 @@
 
   .userList {
     .item:hover {
-      background-color: hsla(0, 0%, 84.7%, .1);
+      //background-color: hsla(0, 0%, 84.7%, .1);
+      background-color: var(--article--hover);
     }
 
     .item {
@@ -147,7 +147,7 @@
           .username {
             font-size: 1.16rem;
             font-weight: 400;
-            color: #333;
+            color: var(--content--color);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;

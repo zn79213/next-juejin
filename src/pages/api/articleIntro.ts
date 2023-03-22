@@ -20,13 +20,14 @@ interface IArticleIntroProps {
 }
 
 const getArticleIntroData = (req: NextApiRequest, res: NextApiResponse<IArticleIntroProps>): void => {
-    const {pageNo, pageSize} = req.body;
+    const {pageNo, pageSize, linkName} = req.body;
     axios.get(`${CMSDOMAIN}/api/article-introductions`, {
-            params: {
-                pageNo,
-                pageSize,
-            },
-        })
+        params: {
+            pageNo,
+            pageSize,
+            linkName,
+        },
+    })
         .then(result => {
             const {data, meta} = result.data || {};
             res.status(200).json({

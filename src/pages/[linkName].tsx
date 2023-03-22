@@ -1,22 +1,24 @@
 import styles from '@/styles/Home.module.scss'
-import React, {FC, useContext, useEffect, useState} from "react";
+import React, {CSSProperties, FC, useContext, useEffect, useRef, useState} from "react";
 import {ThemeContext} from "@/stores/theme";
-import {ILinkList} from "@/components/headerNav";
+import {ILink, ILinkList} from "@/components/headerNav";
 import {NextPage} from "next";
 import Link from "next/link";
 import {CMSDOMAIN, LOCALDOMAIN} from "@/utils";
 import axios from 'axios';
 import {IArticleIntro} from "@/pages/api/articleIntro";
 import Image from "next/image";
-import { IComponentProps } from './_app';
+import {IComponentProps} from './_app';
+import {TransContext} from "@/stores/transfrom";
 
 export interface IProps {
+    linkName: string | string[] | undefined;
     indexHeaderNavData: {
         linkList: ILinkList
     };
     articles: {
         list: {
-            label: string;
+            label: ILink;
             author: string;
             title: string;
             abstract: string;
@@ -28,21 +30,78 @@ export interface IProps {
     };
 }
 
-const Home: NextPage<IProps & IComponentProps> = ({indexHeaderNavData, articles,isSupportWebp}) => {
+const Home: NextPage<IProps & IComponentProps> = ({linkName, indexHeaderNavData, articles, isSupportWebp}) => {
     const {theme} = useContext(ThemeContext);
-    const [content, setContent] = useState(articles);
+    const [content, setContent] = useState<IProps["articles"]>({list: [], total: 0});
+    const [pageNo, setPageNo] = useState(1);
+    const {needTrans} = useContext(TransContext);
+    const [current, setCurrent] = useState(linkName || 'index')
 
-    // useEffect(() => {
-    //
-    // }, [theme])
+    // 节流
+    const throttle = (func: Function, delay = 1000) => {
+        let timer: any = null;
+        return (...a: any[]) => {
+            const context = this;
+            const args = a;
+            if (!timer) {
+                timer = setTimeout(() => {
+                    func.apply(context, args);
+                    timer = null;
+                }, delay);
+            }
+        }
+    }
+
+    useEffect(() => {
+        // console.log(articles)
+        setContent(articles);
+        setCurrent(linkName || 'index');
+    }, [linkName])
+
+    useEffect(() => {
+        // 处理函数
+        const handle = () => {
+            if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 10) {
+                setPageNo(pre => {
+                    axios.post(`${LOCALDOMAIN}/api/articleIntro`, {
+                        pageNo: pre + 1,
+                        pageSize: 8,
+                        linkName,
+                    }).then(({data}) => {
+                        let addList = data.list.map((item: IArticleIntro) => ({
+                            label: item.label,
+                            author: item.author.data.username,
+                            title: item.title,
+                            abstract: item.abstract,
+                            cover: item.cover.data ? (CMSDOMAIN + item.cover.data?.url) : '',
+                            link: `${LOCALDOMAIN}/article/${item.article_id}`,
+                            articleId: item.article_id,
+                        }))
+                        setContent(prev => {
+                            let c: IProps["articles"] = {list: [], total: prev.total};
+                            c.list = [...prev.list, ...addList];
+                            return c;
+                        })
+                    })
+                    return pre + 1;
+                })
+            }
+        }
+        // 滚动事件
+        window.addEventListener('scroll', throttle(handle, 1000));
+
+    }, [])
+
 
     return (
         <>
-            <nav className={styles.vewNav}>
+            <nav className={needTrans ? styles.vewNav + ' ' + styles.scroll : styles.vewNav}>
+                {/*    <nav className={styles.vewNav}>*/}
                 <div className={styles.navList}>
                     {indexHeaderNavData.linkList.list?.map((item, index) => {
                         return (
-                            <Link key={index} href={item.link || '/'} className={styles.listItem}>
+                            <Link key={item.link} href={item.link || '/'}
+                                  className={('/' + current === item.link) ? styles.listItem + ' ' + styles.navActive : styles.listItem}>
                                 <span>{item.label}</span>
                             </Link>
                         )
@@ -52,7 +111,7 @@ const Home: NextPage<IProps & IComponentProps> = ({indexHeaderNavData, articles,
             <main className={styles.main}>
                 <div className={styles.articleMainPC}>
                     <div className={styles.listHeader}>
-                        最新最热
+                        最新 | 最热
                         <ul>
                             {/*<li>最新</li>*/}
                             {/*<li>最热</li>*/}
@@ -72,8 +131,9 @@ const Home: NextPage<IProps & IComponentProps> = ({indexHeaderNavData, articles,
                                                 <div className={styles.abstract}>{item.abstract}</div>
                                                 {/*<ul><li></li></ul>*/}
                                             </div>
-                                            <img src={item.cover} alt={item.title}
-                                                 className={styles.articleCover}/>
+                                            {item.cover &&
+                                                <img src={item.cover} alt={item.title}
+                                                     className={styles.articleCover}/>}
                                         </div>
 
                                         {/*<div className={styles.dislikeButton}>*/}
@@ -90,30 +150,6 @@ const Home: NextPage<IProps & IComponentProps> = ({indexHeaderNavData, articles,
                             )
                         })}
                     </div>
-
-                    {/*<div className={styles.paginationArea}>*/}
-                    {/*    <Pagination*/}
-                    {/*        total={content?.total}*/}
-                    {/*        pageSize={6}*/}
-                    {/*        onPageChange={(pageNo: number): void => {*/}
-                    {/*            axios*/}
-                    {/*                .post(`${LOCALDOMAIN}/api/articleIntro`, {*/}
-                    {/*                    pageNo,*/}
-                    {/*                    pageSize: 6,*/}
-                    {/*                })*/}
-                    {/*                .then(({data}) => {*/}
-                    {/*                    setContent({*/}
-                    {/*                        list: data.list.map((item: IArticleIntro) => ({*/}
-                    {/*                            label: item.label,*/}
-                    {/*                            info: item.info,*/}
-                    {/*                            link: `${LOCALDOMAIN}/article/${item.articleId}`,*/}
-                    {/*                        })),*/}
-                    {/*                        total: data.total,*/}
-                    {/*                    });*/}
-                    {/*                });*/}
-                    {/*        }}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
                 </div>
             </main>
         </>
@@ -121,15 +157,19 @@ const Home: NextPage<IProps & IComponentProps> = ({indexHeaderNavData, articles,
 }
 
 Home.getInitialProps = async (context): Promise<IProps> => {
+    const linkName = context.query.linkName || "index";
+    // console.log(context.query, linkName)
     const {data: homeData} = await axios.get(`${LOCALDOMAIN}/api/home`);
     const {data: articleData} = await axios.post(`${LOCALDOMAIN}/api/articleIntro`, {
         pageNo: 1,
-        pageSize: 6,
-    });
+        pageSize: 8,
+        linkName: linkName
+    })
 
     // console.log(articleData)
 
     return {
+        linkName,
         indexHeaderNavData: homeData.indexHeaderNavData,
         articles: {
             list: articleData.list.map((item: IArticleIntro) => ({
@@ -137,7 +177,7 @@ Home.getInitialProps = async (context): Promise<IProps> => {
                 author: item.author.data.username,
                 title: item.title,
                 abstract: item.abstract,
-                cover: CMSDOMAIN + item.cover.data.url,
+                cover: item.cover.data ? (CMSDOMAIN + item.cover.data?.url) : '',
                 link: `${LOCALDOMAIN}/article/${item.article_id}`,
                 articleId: item.article_id,
             })),

@@ -39,9 +39,20 @@ html[data-theme="light"] {
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
   --primary-background-color: #ffffff;
+  --content-background-color: #f4f5f5;
+  --theme-icon: url("../public/theme_light.png");
   --juejin-font-1: #252933;
   --juejin-font-2: #515767;
   --juejin-brand-2-hover: #1171ee;
+  --article--item: #ffffff;
+  --article--hover: #fafafa;
+  --article--title: #1d2129;
+  --content--color: #333333;
+  --download-title: #1d2129;
+  --catalog--hover: #f7f8fa;
+  --md-h-color: #2c3e50;
+  --md-code-bgc: #000;
+  --md-code-color: #fafafa;
 }
 
 html[data-theme="dark"] {
@@ -75,8 +86,19 @@ html[data-theme="dark"] {
   --card-rgb: 100, 100, 100;
   --card-border-rgb: 200, 200, 200;
   --primary-background-color: #000000;
+  --content-background-color: #1f2022;
+  --theme-icon: url("../public/theme_dark.png");
   --juejin-font-2: #c9ccd6;
-  --juejin-brand-2-hover: #1171ee;
+  --juejn-birand-2-hover: #1171ee;
+  --article--item: #27282a;
+  --article--hover: #1a1b1c;
+  --article--title: #ffffff;
+  --content--color: #ffffff;
+  --download-title: #8a8c90;
+  --catalog--hover: #1a1b1c;
+  --md-h-color: #d0d3d8;
+  --md-code-bgc: #fff5f5;
+  --md-code-color: #333;
 }
 
 * {
@@ -89,7 +111,7 @@ html {
   word-break: break-word;
   text-rendering: optimizeLegibility;
   color: #333;
-  background-color: #f4f5f5;
+  background-color: var(--content-background-color);
   box-sizing: border-box;
 }
 

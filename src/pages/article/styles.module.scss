@@ -1,3 +1,5 @@
+@import "md";
+
 .main {
   margin-top: 1.767rem;
 
@@ -6,30 +8,31 @@
     max-width: 100%;
     box-sizing: border-box;
     margin-bottom: 1.5rem;
-    background-color: #fff;
+    background-color: var(--article--item);
     width: calc(100% - 26.67rem);
 
     article {
       border-radius: 4px 4px 0 0;
       padding-top: 2.667rem;
       z-index: 1;
-      background-color: #fff;
+      //background-color: #fff;
       padding-left: 2.67rem;
       padding-right: 2.67rem;
       box-sizing: border-box;
 
-      .title {
+      #title {
         margin: 0 0 1.667rem;
         font-size: 2.667rem;
         font-weight: 600;
         line-height: 1.31;
-        color: #252933;
+        color: var(--juejin-font-1);
       }
 
       .authorInfo {
         display: flex;
         align-items: center;
         margin-bottom: 1.667rem;
+        cursor: pointer;
 
         .authorAvatar {
           font-size: 0;
@@ -54,7 +57,7 @@
             align-items: center;
             font-size: 1.333rem;
             font-weight: 500;
-            color: #515767;
+            color: var(--juejin-font-2);
             line-height: 2rem;
 
             .name {
@@ -87,8 +90,6 @@
             .time {
               letter-spacing: 1px;
             }
-
-
           }
         }
       }
@@ -102,7 +103,7 @@
         line-height: 1.7;
         font-weight: 400;
         font-size: 16px;
-        color: #2c3e50;
+        color: var(--md-h-color);
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
         -webkit-font-smoothing: antialiased;
         overflow: hidden;
@@ -114,214 +115,9 @@
         font-weight: 400;
         font-size: 16px;
         overflow-x: hidden;
-        color: #2c3e50;
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
         -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale
-      }
-
-      .markdownBody h1, .markdownBody h2, .markdownBody h3, .markdownBody h4, .markdownBody h5, .markdownBody h6 {
-        line-height: 1.5;
-        font-weight: 600;
-        margin-top: 35px;
-        margin-bottom: 8px;
-        padding-bottom: 5px
-      }
-
-      .markdownBody h1 :before, .markdownBody h2 :before, .markdownBody h3 :before, .markdownBody h4 :before, .markdownBody h5 :before, .markdownBody h6 :before {
-        content: "#";
-        display: inline-block;
-        color: #3eaf7c;
-        padding-right: .23em
-      }
-
-      .markdownBody h1 {
-        font-size: 30px;
-        margin-bottom: 5px
-      }
-
-      .markdownBody h2 {
-        padding-bottom: 8px;
-        margin-top: 50px;
-        font-size: 24px;
-        border-bottom: 1px solid #eaecef
-      }
-
-      .markdownBody h3 {
-        font-size: 18px;
-        padding-bottom: 0
-      }
-
-      .markdownBody h4 {
-        font-size: 16px
-      }
-
-      .markdownBody h5 {
-        font-size: 15px
-      }
-
-      .markdownBody h6 {
-        margin-top: 5px
-      }
-
-      .markdownBody p {
-        line-height: inherit;
-        margin-top: 22px;
-        margin-bottom: 22px
-      }
-
-      .markdownBody img {
-        max-width: 100%
-      }
-
-      .markdownBody hr {
-        border: none;
-        border-top: 1px solid #eaecef;
-        margin-top: 32px;
-        margin-bottom: 32px
-      }
-
-      .markdownBody code {
-        word-break: break-word;
-        overflow-x: auto;
-        font-weight: 400;
-        background-color: rgba(27, 31, 35, .05);
-        color: #476582;
-        margin: 0;
-        font-size: .85em;
-        border-radius: 3px;
-        padding: .165em .5em
-      }
-
-      .markdownBody code, .markdownBody pre {
-        font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace
-      }
-
-      .markdownBody pre {
-        overflow: auto;
-        position: relative;
-        line-height: 1.6;
-        padding: 20px 24px;
-        background-color: #282c34;
-        border-radius: 6px
-      }
-
-      .markdownBody pre > code {
-        font-size: 14px;
-        padding: 0;
-        margin: 0;
-        word-break: normal;
-        display: block;
-        overflow-x: auto;
-        color: #fff
-      }
-
-      .markdownBody a {
-        text-decoration: none;
-        color: #3eaf7c;
-        font-weight: 500
-      }
-
-      .markdownBody a:active, .markdownBody a:hover {
-        color: #42b983;
-        border-bottom: 1px solid #42b983
-      }
-
-      .markdownBody table {
-        display: inline-block !important;
-        font-size: 14px;
-        width: auto;
-        max-width: 100%;
-        overflow: auto;
-        margin: 16px 0;
-        border-collapse: collapse
-      }
-
-      .markdownBody thead {
-        background: #f6f6f6;
-        color: #000;
-        text-align: left
-      }
-
-      .markdownBody tr:nth-child(2n) {
-        background-color: #f6f8fa
-      }
-
-      .markdownBody td, .markdownBody th {
-        border: 1px solid #dfe2e5;
-        padding: 10px 16px;
-        line-height: 24px
-      }
-
-      .markdownBody td {
-        min-width: 120px
-      }
-
-      .markdownBody blockquote {
-        font-size: 14px;
-        padding: 6px 23px;
-        margin: 22px 0;
-        border-left: 6px solid #42b983;
-        background-color: #f3f5f7;
-        font-weight: 400
-      }
-
-      .markdownBody blockquote:after {
-        display: block;
-        content: ""
-      }
-
-      .markdownBody blockquote > p {
-        margin: 10px 0
-      }
-
-      .markdownBody ol, .markdownBody p, .markdownBody ul {
-        line-height: 1.7
-      }
-
-      .markdownBody ol, .markdownBody ul {
-        padding-left: 28px
-      }
-
-      .markdownBody ol li, .markdownBody ul li {
-        margin-bottom: 0;
-        list-style: inherit
-      }
-
-      .markdownBody ol li .task-list-item, .markdownBody ul li .task-list-item {
-        list-style: none
-      }
-
-      .markdownBody ol li .task-list-item ol, .markdownBody ol li .task-list-item ul, .markdownBody ul li .task-list-item ol, .markdownBody ul li .task-list-item ul {
-        margin-top: 0
-      }
-
-      .markdownBody ol ol, .markdownBody ol ul, .markdownBody ul ol, .markdownBody ul ul {
-        margin-top: 3px
-      }
-
-      .markdownBody ol li {
-        padding-left: 6px
-      }
-
-      .markdownBody .contains-task-list {
-        padding-left: 0
-      }
-
-      .markdownBody .task-list-item {
-        list-style: none
-      }
-
-      @media (max-width: 720px) {
-        .markdownBody h1 {
-          font-size: 24px
-        }
-        .markdownBody h2 {
-          font-size: 20px
-        }
-        .markdownBody h3 {
-          font-size: 18px
-        }
+        -moz-osx-font-smoothing: grayscale;
       }
     }
   }
@@ -335,7 +131,7 @@
 
     .author {
       border-radius: 4px;
-      background: #fff;
+      background: var(--article--item);
       padding: 1.667rem;
       margin-bottom: 20px;
 
@@ -367,7 +163,8 @@
             font-size: 1.333rem;
             font-weight: 500;
             line-height: 2rem;
-            color: #252933;
+            //color: #252933;
+            color: var(--article--title);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -395,7 +192,8 @@
 
           .position {
             font-size: 1.167rem;
-            color: #252933;
+            //color: #252933;
+            color: var(--juejin-font-2);
             font-weight: 400;
             margin-top: 5px;
           }
@@ -404,17 +202,19 @@
     }
 
     .block {
-      //margin-bottom: 20px;
-      background-color: #fff;
+      margin-bottom: 20px;
+      background: var(--article--item);
       box-shadow: none;
       border-radius: 4px;
+      cursor: pointer;
 
       .blockTitle {
         padding: 1.333rem 0;
         margin: 0 1.667rem;
         font-size: 16px;
         line-height: 2rem;
-        color: #1d2129;
+        //color: #1d2129;
+        color: var(--article--title);
         font-weight: 500;
         border-bottom: 1px solid #e4e6eb;
       }
@@ -432,7 +232,7 @@
 
           .item:hover {
             .aTag {
-              background-color: #f7f8fa;
+              background-color: var(--catalog--hover);
               border-radius: 4px;
             }
           }
@@ -443,7 +243,7 @@
             font-size: 1.167rem;
             font-weight: 400;
             line-height: 22px;
-            color: #000;
+            color: var(--juejin-font-2);
             list-style: none;
 
             .contain {
@@ -466,7 +266,11 @@
               }
             }
 
-            .contain::before {
+            .active {
+              color: #1e80ff;
+            }
+
+            .active::before {
               content: "";
               position: absolute;
               top: 4px;
@@ -477,6 +281,7 @@
               background: #1e80ff;
               border-radius: 0 4px 4px 0;
             }
+
           }
         }
       }

@@ -11,7 +11,15 @@ const nextConfig = {
                     {key: "Access-Control-Allow-Headers", value: "*"},
                 ]
             },
-
+        ]
+    },
+    async redirects() {
+        return [
+            {
+                source: '/',
+                destination: '/index',
+                permanent: true,
+            },
         ]
     },
     // compiler: {

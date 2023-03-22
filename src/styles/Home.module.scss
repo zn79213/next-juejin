@@ -5,7 +5,7 @@
   margin: 5.17rem auto 0 auto;
 
   .articleMainPC {
-    background-color: #fff;
+    background: var(--article--item);
     display: flex;
     flex-direction: column;
     //align-items: center;
@@ -13,7 +13,7 @@
 
   .listHeader {
     padding: 1.3rem 1rem;
-    border-bottom: 1px solid hsla(0,0%,59.2%,.1);
+    border-bottom: 1px solid hsla(0, 0%, 59.2%, .1);
     font-size: 1.17rem;
     color: #909090;
   }
@@ -21,14 +21,14 @@
   .articles {
 
     .article:hover {
-      background: #fafafa;
+      background: var(--article--hover);
     }
 
     .article {
       position: relative;
       cursor: pointer;
       padding: 12px 20px 0;
-      background: #fff;
+      background: var(--article--item);
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -47,7 +47,7 @@
             font-weight: 700;
             font-size: 16px;
             line-height: 24px;
-            color: #1d2129;
+            color: var(--article--title);
             width: 100%;
             display: -webkit-box;
             overflow: hidden;
@@ -103,6 +103,10 @@
   }
 }
 
+.scroll {
+  transform: translate3d(0, -5.083rem, 0);
+}
+
 .vewNav {
   position: fixed;
   top: 5.083rem;
@@ -112,8 +116,8 @@
   z-index: 100;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
   transition: all .2s;
-  transform: translateZ(0);
-  background-color: #fff;
+  //transform: translateZ(0);
+  background: var(--primary-background-color);
 
   .navList {
     max-width: 960px;
@@ -131,6 +135,14 @@
       font-size: 1.16rem;
       color: #71777c;
       padding: 0 1rem;
+    }
+
+    .listItem:hover {
+      color: #1e80ff;;
+    }
+
+    .navActive {
+      color: #1e80ff;
     }
   }
 }

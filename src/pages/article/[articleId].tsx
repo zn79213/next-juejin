@@ -1,7 +1,7 @@
 import {CMSDOMAIN, LOCALDOMAIN} from '@/utils';
 import axios from 'axios';
-import React, {CSSProperties, useEffect, useRef, useState} from 'react';
-import type {GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage} from 'next';
+import React, {CSSProperties, useContext, useEffect, useRef, useState} from 'react';
+import type {GetServerSideProps, NextPage} from 'next';
 import styles from './styles.module.scss';
 import {IAuthor} from "@/components/aside";
 import ReactMarkdown from "react-markdown";
@@ -11,6 +11,7 @@ import rehypeHighlight from 'rehype-highlight'
 
 
 import {HeadingProps} from "react-markdown/lib/ast-to-react";
+import {TransContext} from "@/stores/transfrom";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 // const showdown = require('showdown');
@@ -19,7 +20,7 @@ export interface IArticleProps {
     title: string;
     author: IAuthor;
     abstract: string;
-    cover: string;
+    cover?: string;
     createdAt: string;
     content: string;
 }
@@ -31,26 +32,51 @@ const Article: NextPage<IArticleProps> = ({title, author, abstract, cover, creat
         id: string,
         title: string,
     }[] = [];
+    const {needTrans} = useContext(TransContext);
     const [needFixed, setNeedFixed] = useState(false);
     const tocRef = useRef<HTMLDivElement>(null);
     const styleObj: CSSProperties = {
         width: 300,
-        position: needFixed ? 'fixed' : 'relative',
-        top: 20,
+        position: needFixed ? 'fixed' : 'static',
+        top: needTrans ? 20 : 80,
         zIndex: 100,
     };
 
+    const [current, setCurrent] = useState('');
+
+
     useEffect(() => {
-        const height = (tocRef.current?.getBoundingClientRect().top || 10) - (document.body.getBoundingClientRect().top) ||  300
-        // console.log(height)
-        window.onscroll = function () {
+        const height = (tocRef.current?.getBoundingClientRect().top || 10) - (document.body.getBoundingClientRect().top) || 300
+
+        // 实现吸顶以及目录active
+        function ceiling() {
             const scrollTop = document.documentElement.scrollTop;
+            // 吸顶
             if (scrollTop > height && !needFixed) {
                 setNeedFixed(true);
-            } else if(scrollTop <= height) {
+            } else if (scrollTop <= height) {
                 setNeedFixed(false);
             }
-        };
+
+            // 目录是否激活
+            let currentId;
+            for (let i = 0; i < toc.length; i++) {
+                let itemTop = document.getElementById(toc[i].id)?.offsetTop || 0;
+                //当前元素顶部相对于指定元素顶部的偏移
+                if (scrollTop > itemTop - 20) {
+                    currentId = toc[i].id;
+                } else {
+                    break;
+                }
+            }
+            // console.log(currentId);
+            currentId ? setCurrent(currentId) : setCurrent('');
+        }
+
+        window.addEventListener('scroll', ceiling)
+        return (): void => {
+            window.removeEventListener('scroll', ceiling)
+        }
     }, []);
 
     // Magic.
@@ -77,7 +103,8 @@ const Article: NextPage<IArticleProps> = ({title, author, abstract, cover, creat
             <ul className={styles.catalogList}>
                 {toc.map(({level, id, title}) => (
                     <li key={id} className={styles.item}>
-                        <div className={styles.contain} style={{paddingLeft: level * 12}}>
+                        <div className={current === id ? styles.contain + ' ' + styles.active : styles.contain}
+                             style={{paddingLeft: level * 12}}>
                             <a href={`#${id}`} className={styles.aTag}>{title}</a>
                         </div>
                     </li>
@@ -91,7 +118,7 @@ const Article: NextPage<IArticleProps> = ({title, author, abstract, cover, creat
         <div className={styles.main}>
             <div className={styles.article}>
                 <article>
-                    <h1 className={styles.title}>{title}</h1>
+                    <h1 id={styles.title}>{title}</h1>
                     <div className={styles.authorInfo}>
                         <div className={styles.authorAvatar}>
                             <img src={author.avatar} alt="" className={styles.avatar}/>
@@ -109,9 +136,10 @@ const Article: NextPage<IArticleProps> = ({title, author, abstract, cover, creat
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <img src={cover} alt={title} className={styles.cover}/>
-                    </div>
+                    {cover &&
+                        <div>
+                            <img src={cover} alt={title} className={styles.cover}/>
+                        </div>}
                     <div className={styles.content}>
                         <div className={styles.markdownBody}>
                             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeHighlight]}
@@ -120,9 +148,9 @@ const Article: NextPage<IArticleProps> = ({title, author, abstract, cover, creat
                                                // h1:()=><></>,
                                                h2: addToTOC,
                                                h3: addToTOC,
-                                               h4: addToTOC,
-                                               h5: addToTOC,
-                                               h6: addToTOC,
+                                               // h4: addToTOC,
+                                               // h5: addToTOC,
+                                               // h6: addToTOC,
                                            }}
                             >
                                 {content}
@@ -154,10 +182,9 @@ const Article: NextPage<IArticleProps> = ({title, author, abstract, cover, creat
                     <div className={styles.blockTitle}>相关文章</div>
                     <div className={styles.blockBody}>
                         <div className={styles.entryList}>
-                            <div >相关文章</div>
-                            <div >相关文章</div>
-                            <div >相关文章</div>
-
+                            <div>相关文章</div>
+                            <div>相关文章</div>
+                            <div>相关文章</div>
                         </div>
                     </div>
                 </div>
@@ -192,7 +219,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
                 introduction: data.author.data.introduction,
             },
             abstract: data.abstract,
-            cover: `${CMSDOMAIN}${data.cover.data.url}`,
+            cover: data.cover.data ? `${CMSDOMAIN}${data.cover.data?.url}` : '',
             createdAt: data.createdAt,
             content: data.content,
             label: data.label,
