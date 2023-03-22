@@ -1,7 +1,7 @@
-import axios from 'axios'
 import {CMSDOMAIN} from "@/utils";
 import {NextApiRequest, NextApiResponse} from "next";
 import {ILinkList} from "@/components/headerNav";
+import {HTTP} from "@/lib/strapi";
 
 
 interface IHomeProps {
@@ -11,10 +11,8 @@ interface IHomeProps {
 }
 
 const getHomeData = (req: NextApiRequest, res: NextApiResponse<IHomeProps>): void => {
-    axios.get(`${CMSDOMAIN}/api/homes`).then(result => {
+    HTTP.get(`${CMSDOMAIN}/api/homes`).then(result => {
         const {link_lists} = result.data || {};
-        // console.log(link_lists);
-        // const linkListItem = link_lists?.data?.find((v: ILinkList) => v.title === 'index_header_nav');
         res.status(200).json({
             indexHeaderNavData: {
                 linkList: {

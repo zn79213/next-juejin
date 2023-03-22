@@ -1,12 +1,10 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
-import axios from 'axios';
 import {ILayoutProps} from '@/components/layout';
 import {CMSDOMAIN} from '@/utils';
-import * as console from "console";
+import {HTTP} from "@/lib/strapi";
 
 const getLayoutData = (req: NextApiRequest, res: NextApiResponse<ILayoutProps>): void => {
-    axios.get(`${CMSDOMAIN}/api/layouts`).then(result => {
-        // console.log(result.data)
+    HTTP.get(`${CMSDOMAIN}/api/layouts`).then(result => {
         const {
             link_lists,
             logo_text,
@@ -18,9 +16,8 @@ const getLayoutData = (req: NextApiRequest, res: NextApiResponse<ILayoutProps>):
             advs,
         } = result.data || {};
 
-        axios.get(`${CMSDOMAIN}/api/users?populate=deep`).then(result => {
-            const authors = result.data || {};
-            // console.log(result)
+        HTTP.get(`${CMSDOMAIN}/api/users?populate=deep`).then(result => {
+            const authors = result.data.slice(0, 3) || [];
 
             res.status(200).json({
                 headerNavData: {
@@ -54,13 +51,11 @@ const getLayoutData = (req: NextApiRequest, res: NextApiResponse<ILayoutProps>):
                         username: item.username,
                         rank: `${CMSDOMAIN}${item.rank.rank_img.url}`,
                         avatar: `${CMSDOMAIN}${item.avatar.url}`,
-                        introduction:item.introduction,
+                        introduction: item.introduction,
                     }))
                 }
             });
 
-        }).catch(e => {
-            console.log(e);
         })
     });
 };

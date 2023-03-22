@@ -1,6 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
-import axios from 'axios';
 import {CMSDOMAIN} from '@/utils';
+import {HTTP} from "@/lib/strapi";
 
 export interface IArticleIntro {
     label: string;
@@ -21,20 +21,19 @@ interface IArticleIntroProps {
 
 const getArticleIntroData = (req: NextApiRequest, res: NextApiResponse<IArticleIntroProps>): void => {
     const {pageNo, pageSize, linkName} = req.body;
-    axios.get(`${CMSDOMAIN}/api/article-introductions`, {
+    HTTP.get(`${CMSDOMAIN}/api/article-introductions`, {
         params: {
             pageNo,
             pageSize,
             linkName,
         },
-    })
-        .then(result => {
-            const {data, meta} = result.data || {};
-            res.status(200).json({
-                list: Object.values(data),
-                total: meta.pagination.total,
-            });
+    }).then(result => {
+        const {data, meta} = result.data || {};
+        res.status(200).json({
+            list: Object.values(data),
+            total: meta.pagination.total,
         });
+    });
 };
 
 export default getArticleIntroData;

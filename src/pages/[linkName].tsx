@@ -55,7 +55,7 @@ const Home: NextPage<IProps & IComponentProps> = ({linkName, indexHeaderNavData,
     useEffect(() => {
         // console.log(articles)
         setContent(articles);
-        setCurrent(linkName || 'index');
+        setCurrent(linkName || '/index');
     }, [linkName])
 
     useEffect(() => {
@@ -87,9 +87,12 @@ const Home: NextPage<IProps & IComponentProps> = ({linkName, indexHeaderNavData,
                 })
             }
         }
+        const f = throttle(handle, 1000);
         // 滚动事件
-        window.addEventListener('scroll', throttle(handle, 1000));
-
+        window.addEventListener('scroll', f);
+        return (): void => {
+            window.removeEventListener('scroll', f);
+        }
     }, [])
 
 
@@ -100,7 +103,7 @@ const Home: NextPage<IProps & IComponentProps> = ({linkName, indexHeaderNavData,
                 <div className={styles.navList}>
                     {indexHeaderNavData.linkList.list?.map((item, index) => {
                         return (
-                            <Link key={item.link} href={item.link || '/'}
+                            <Link key={item.link} href={item.link === "/index" ? "/" : (item.link || '/')}
                                   className={('/' + current === item.link) ? styles.listItem + ' ' + styles.navActive : styles.listItem}>
                                 <span>{item.label}</span>
                             </Link>
