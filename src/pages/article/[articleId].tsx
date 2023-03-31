@@ -46,7 +46,9 @@ const Article: NextPage<IArticleProps> = ({title, author, abstract, cover, creat
 
 
     useEffect(() => {
-        const height = (tocRef.current?.getBoundingClientRect().top || 10) - (document.body.getBoundingClientRect().top) || 300
+        // const height = (tocRef.current?.getBoundingClientRect().top || 10) - (document.body.getBoundingClientRect().top) || 300
+        const height = (tocRef.current?.offsetTop || 270) + 80 || 350
+        // console.log(height)
 
         // 实现吸顶以及目录active
         function ceiling() {
@@ -73,9 +75,9 @@ const Article: NextPage<IArticleProps> = ({title, author, abstract, cover, creat
             currentId ? setCurrent(currentId) : setCurrent('');
         }
 
-        window.addEventListener('scroll', ceiling)
+        document.addEventListener('scroll', ceiling)
         return (): void => {
-            window.removeEventListener('scroll', ceiling)
+            document.removeEventListener('scroll', ceiling)
         }
     }, []);
 
@@ -113,7 +115,6 @@ const Article: NextPage<IArticleProps> = ({title, author, abstract, cover, creat
         );
     }
 
-
     return (
         <div className={styles.main}>
             <div className={styles.article}>
@@ -145,7 +146,6 @@ const Article: NextPage<IArticleProps> = ({title, author, abstract, cover, creat
                             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeHighlight]}
                                            components={{
                                                h1: addToTOC,
-                                               // h1:()=><></>,
                                                h2: addToTOC,
                                                h3: addToTOC,
                                                // h4: addToTOC,
@@ -166,7 +166,7 @@ const Article: NextPage<IArticleProps> = ({title, author, abstract, cover, creat
             <div className={styles.sideBar}>
                 <div className={styles.author}>
                     <a href="" className={styles.itemInfo}>
-                        <img src={author.avatar} alt="" className={styles.avatar}/>
+                        <img src={author.avatar} alt="avatar" className={styles.avatar}/>
                         <div className={styles.userInfo}>
                             <div className={styles.username}>
                                 <span className={styles.name}>{author.username}</span>
@@ -229,6 +229,4 @@ export const getServerSideProps: GetServerSideProps = async context => {
         }
     };
 };
-
-
 export default Article;

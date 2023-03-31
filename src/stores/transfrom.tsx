@@ -29,9 +29,11 @@ export const TransContextProvider = ({children}: IProps): JSX.Element => {
             }
             pre = scrollTop;
         };
-        window.addEventListener('scroll', scrollTrans);
+
+
+        document.addEventListener('scroll', scrollTrans);
         return (): void => {
-            window.removeEventListener('scroll', scrollTrans);
+            document.removeEventListener('scroll', scrollTrans);
         }
     }, [])
 

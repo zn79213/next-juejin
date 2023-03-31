@@ -1,105 +1,113 @@
 .main {
   //position: relative;
-  width: 100%;
+  width: 95vw;
+  display: flex;
   max-width: 960px;
-  margin: 5.17rem auto 0 auto;
+  margin: 4.66rem auto 0 auto;
+  border-radius: 2px;
 
   .articleMainPC {
-    background: var(--article--item);
+    flex: 1;
     display: flex;
     flex-direction: column;
     //align-items: center;
   }
 
   .listHeader {
+    background-color: var(--article--item);
     padding: 1.3rem 1rem;
     border-bottom: 1px solid hsla(0, 0%, 59.2%, .1);
     font-size: 1.17rem;
     color: #909090;
   }
 
-  .articles {
+  .article:hover {
+    background: var(--article--hover);
+  }
 
-    .article:hover {
-      background: var(--article--hover);
+  .articles {
+  }
+
+  .article:hover {
+    background: var(--article--hover);
+  }
+
+  .article {
+    position: relative;
+    cursor: pointer;
+    padding: 12px 20px 0;
+    background: var(--article--item);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .articleMain {
+      margin-top: 6px;
+      padding-bottom: 12px;
+      display: flex;
+      border-bottom: 1px solid rgba(228, 230, 235, 0.5);
+      width: 100%;
+
+      .contentMain {
+        flex: 1 1 auto;
+
+        .title {
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 24px;
+          color: var(--article--title);
+          width: 100%;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          margin-bottom: 8px;
+        }
+
+        .abstract {
+          color: #86909c;
+          font-size: 13px;
+          line-height: 22px;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          margin-bottom: 10px;
+        }
+      }
+
+      .articleCover {
+        flex: 0 0 auto;
+        width: 120px;
+        height: 80px;
+        margin-left: 24px;
+        border-radius: 2px
+      }
     }
 
-    .article {
-      position: relative;
+    .dislikeButton {
+      position: absolute;
+      right: 1.667rem;
+      transition: all .15s linear;
+      top: 1.333rem;
+      width: 1rem;
+      height: 1rem;
+      background: url(//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/29d9ea6….svg) 0 0 no-repeat;
+      background-size: 100% 100%;
       cursor: pointer;
-      padding: 12px 20px 0;
-      background: var(--article--item);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-
-      .articleMain {
-        margin-top: 6px;
-        padding-bottom: 12px;
-        display: flex;
-        border-bottom: 1px solid rgba(228, 230, 235, 0.5);
-        width: 100%;
-
-        .contentMain {
-          flex: 1 1 auto;
-
-          .title {
-            font-weight: 700;
-            font-size: 16px;
-            line-height: 24px;
-            color: var(--article--title);
-            width: 100%;
-            display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            margin-bottom: 8px;
-          }
-
-          .abstract {
-            color: #86909c;
-            font-size: 13px;
-            line-height: 22px;
-            display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            margin-bottom: 10px;
-          }
-        }
-
-        .articleCover {
-          flex: 0 0 auto;
-          width: 120px;
-          height: 80px;
-          margin-left: 24px;
-          border-radius: 2px
-        }
-      }
-
-      .dislikeButton {
-        position: absolute;
-        right: 1.667rem;
-        transition: all .15s linear;
-        top: 1.333rem;
-        width: 1rem;
-        height: 1rem;
-        background: url(//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/29d9ea6….svg) 0 0 no-repeat;
-        background-size: 100% 100%;
-        cursor: pointer;
-      }
     }
   }
 
+
   @media screen and (min-width: 960px) {
 
-    .articleMainPC {
-      margin-right: 21.667rem;
-      border-radius: 2px;
-      width: 700px;
-    }
+    //.articleMainPC {
+    //  margin-right: 21.667rem;
+    //  border-radius: 2px;
+    //  width: 700px;
+    //}
   }
 }
 
@@ -109,7 +117,7 @@
 
 .vewNav {
   position: fixed;
-  top: 5.083rem;
+  top: 5rem;
   left: 0;
   width: 100%;
   height: 3.833rem;

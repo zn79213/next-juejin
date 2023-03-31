@@ -30,7 +30,7 @@ export interface IAsideProps {
 
 export const Aside: FC<IAsideProps> = ({appDownload, adv, authors}) => {
     return (
-        <div>
+        <div className={styles.aside}>
             <div className={styles.bannerBlock}>
                 <div className={styles.banner}>
                     <a href={adv.advLink.link || '/'}>

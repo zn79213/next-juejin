@@ -67,7 +67,10 @@ export const HeaderNav: FC<IHeaderNavProps> = ({
                                             return (
                                                 <li key={index} className={styles.navItem}>
                                                     <Link href={item.link || '/'} className={styles.navItemLink}>
-                                                        <span className={styles.navItemText}>{item.label}</span>
+                                                        <span className={styles.navItemText} onClick={() => {
+                                                            setFold(!fold)
+                                                        }
+                                                        }>{item.label}</span>
                                                     </Link>
                                                 </li>
                                             )

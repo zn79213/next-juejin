@@ -3,13 +3,12 @@ import Script from "next/script";
 
 export default function Document() {
   return (
-    <Html>
+    <Html lang="en">
       <Head />
       <body>
         <Main />
         <NextScript />
         <Script id="theme-script" strategy="beforeInteractive" />
-
       </body>
     </Html>
   )

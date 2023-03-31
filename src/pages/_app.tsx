@@ -15,10 +15,10 @@ export interface IComponentProps {
 }
 
 const MyApp = (data: AppProps & ILayoutProps & IComponentProps): JSX.Element => {
-    const {Component, pageProps, headerNavData, asideData, isMobile, isSupportWebp} = data;
+    const {Component, pageProps, headerNavData, isMobile, isSupportWebp} = data;
 
     return (
-        <div>
+        <>
             <Head>
                 <title>{`稀土掘金`}</title>
                 <meta name="description"
@@ -30,13 +30,13 @@ const MyApp = (data: AppProps & ILayoutProps & IComponentProps): JSX.Element => 
             <ThemeContextProvider>
                 <UserAgentProvider>
                     <TransContextProvider>
-                        <Layout headerNavData={headerNavData} asideData={asideData}>
+                        <Layout headerNavData={headerNavData}>
                             <Component {...pageProps} isMobile={isMobile} isSupportWebp={isSupportWebp}/>
                         </Layout>
                     </TransContextProvider>
                 </UserAgentProvider>
             </ThemeContextProvider>
-        </div>
+        </>
     )
 }
 

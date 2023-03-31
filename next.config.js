@@ -13,15 +13,15 @@ const nextConfig = {
             },
         ]
     },
-    async redirects() {
-        return [
-            {
-                source: '/',
-                destination: '/index',
-                permanent: true,
-            },
-        ]
-    },
+    // async redirects() {
+    //     return [
+    //         {
+    //             source: '/',
+    //             destination: '/index',
+    //             permanent: true,
+    //         },
+    //     ]
+    // },
     // compiler: {
     //   styledComponents: true,
     // },

@@ -1,9 +1,16 @@
 @import "md";
 
 .main {
-  margin-top: 1.767rem;
+  //margin-top: 1.767rem;
+  display: flex;
+  //width: calc(100% - 26.67rem);
+  max-width:1044px ;
+  margin: 1.767rem auto 0 auto;
+
 
   .article {
+    flex: 1;
+    //margin-right: 20px;
     position: relative;
     max-width: 100%;
     box-sizing: border-box;
@@ -124,10 +131,8 @@
 
   .sideBar {
     display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
     width: 25rem;
+    margin-left: 20px;
 
     .author {
       border-radius: 4px;

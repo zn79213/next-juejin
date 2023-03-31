@@ -13,12 +13,12 @@
   color: #909090;
   height: 5rem;
   z-index: 250;
-  //margin-bottom: 1px;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   transition: all .2s;
+  display: block;
   //transform: translateZ(0);
   //transform: translate3d(0,100%,0);
 
@@ -75,6 +75,7 @@
 
         span {
           margin-right: 0.333rem;
+          cursor: pointer;
         }
 
         .fold_down {

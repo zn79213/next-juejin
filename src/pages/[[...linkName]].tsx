@@ -10,12 +10,14 @@ import {IArticleIntro} from "@/pages/api/articleIntro";
 import Image from "next/image";
 import {IComponentProps} from './_app';
 import {TransContext} from "@/stores/transfrom";
+import {Aside, IAsideProps} from "@/components/aside";
 
 export interface IProps {
     linkName: string | string[] | undefined;
     indexHeaderNavData: {
         linkList: ILinkList
     };
+    asideData: IAsideProps;
     articles: {
         list: {
             label: ILink;
@@ -28,9 +30,10 @@ export interface IProps {
         }[];
         total: number;
     };
+
 }
 
-const Home: NextPage<IProps & IComponentProps> = ({linkName, indexHeaderNavData, articles, isSupportWebp}) => {
+const Home: NextPage<IProps & IComponentProps> = ({linkName, indexHeaderNavData, articles, isSupportWebp,asideData}) => {
     const {theme} = useContext(ThemeContext);
     const [content, setContent] = useState<IProps["articles"]>({list: [], total: 0});
     const [pageNo, setPageNo] = useState(1);
@@ -55,7 +58,7 @@ const Home: NextPage<IProps & IComponentProps> = ({linkName, indexHeaderNavData,
     useEffect(() => {
         // console.log(articles)
         setContent(articles);
-        setCurrent(linkName || '/index');
+        setCurrent(linkName || '');
     }, [linkName])
 
     useEffect(() => {
@@ -87,11 +90,11 @@ const Home: NextPage<IProps & IComponentProps> = ({linkName, indexHeaderNavData,
                 })
             }
         }
-        const f = throttle(handle, 1000);
+        const scrollLoading = throttle(handle, 1000);
         // 滚动事件
-        window.addEventListener('scroll', f);
+        document.addEventListener('scroll', scrollLoading);
         return (): void => {
-            window.removeEventListener('scroll', f);
+            document.removeEventListener('scroll', scrollLoading);
         }
     }, [])
 
@@ -102,8 +105,10 @@ const Home: NextPage<IProps & IComponentProps> = ({linkName, indexHeaderNavData,
                 {/*    <nav className={styles.vewNav}>*/}
                 <div className={styles.navList}>
                     {indexHeaderNavData.linkList.list?.map((item, index) => {
+                        const link = item.link || '/'
+                        // console.log("link: ", link)
                         return (
-                            <Link key={item.link} href={item.link === "/index" ? "/" : (item.link || '/')}
+                            <Link key={item.link} href={link}
                                   className={('/' + current === item.link) ? styles.listItem + ' ' + styles.navActive : styles.listItem}>
                                 <span>{item.label}</span>
                             </Link>
@@ -111,7 +116,7 @@ const Home: NextPage<IProps & IComponentProps> = ({linkName, indexHeaderNavData,
                     })}
                 </div>
             </nav>
-            <main className={styles.main}>
+            <div className={styles.main}>
                 <div className={styles.articleMainPC}>
                     <div className={styles.listHeader}>
                         最新 | 最热
@@ -154,13 +159,15 @@ const Home: NextPage<IProps & IComponentProps> = ({linkName, indexHeaderNavData,
                         })}
                     </div>
                 </div>
-            </main>
+                <Aside {...asideData}/>
+                {/*{isSupportWebp && <Aside {...asideData}/>}*/}
+            </div>
         </>
     )
 }
 
 Home.getInitialProps = async (context): Promise<IProps> => {
-    const linkName = context.query.linkName || "index";
+    const linkName = context.query.linkName ? context.query.linkName : '';
     // console.log(context.query, linkName)
     const {data: homeData} = await axios.get(`${LOCALDOMAIN}/api/home`);
     const {data: articleData} = await axios.post(`${LOCALDOMAIN}/api/articleIntro`, {
@@ -174,6 +181,7 @@ Home.getInitialProps = async (context): Promise<IProps> => {
     return {
         linkName,
         indexHeaderNavData: homeData.indexHeaderNavData,
+        asideData: homeData.asideData,
         articles: {
             list: articleData.list.map((item: IArticleIntro) => ({
                 label: item.label,

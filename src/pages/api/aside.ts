@@ -12,8 +12,8 @@ interface IHomeProps {
     asideData: IAsideProps
 }
 
-const getHomeData = (req: NextApiRequest, res: NextApiResponse<IHomeProps>): void => {
-    HTTP.get(`${CMSDOMAIN}/api/homes`).then(result => {
+const getAsideData = (req: NextApiRequest, res: NextApiResponse<IHomeProps>): void => {
+    HTTP.get(`${CMSDOMAIN}/api/layouts`).then(result => {
         const {
             link_lists,
             image_banner,
@@ -59,4 +59,4 @@ const getHomeData = (req: NextApiRequest, res: NextApiResponse<IHomeProps>): voi
 
 }
 
-export default getHomeData;
+export default getAsideData;

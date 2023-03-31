@@ -1,3 +1,7 @@
+.aside{
+  display: none;
+  margin-left: 20px;
+}
 .bannerBlock {
   background: var(--article--item);
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
@@ -212,3 +216,8 @@
   }
 }
 
+@media screen and (min-width: 960px) {
+  .aside {
+    display: block;
+  }
+}
